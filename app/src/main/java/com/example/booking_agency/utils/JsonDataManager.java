@@ -3,6 +3,7 @@ package com.example.booking_agency.utils;
 import android.content.Context;
 import com.example.booking_agency.models.User;
 import com.example.booking_agency.models.Service;
+import com.example.booking_agency.models.Room;
 import com.example.booking_agency.models.Booking;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -132,19 +133,28 @@ public class JsonDataManager {
                     Booking booking = new Booking();
                     booking.setId(bookingJson.getString("id"));
                     booking.setUserId(bookingJson.getString("userId"));
-                    booking.setServiceId(bookingJson.getString("serviceId"));
-                    booking.setServiceName(bookingJson.getString("serviceName"));
-                    booking.setProviderName(bookingJson.optString("providerName"));
-                    booking.setProviderImage(bookingJson.optString("providerImage"));
-                    booking.setBookingDate(bookingJson.getString("bookingDate"));
-                    booking.setBookingTime(bookingJson.getString("bookingTime"));
+                    booking.setRoomId(bookingJson.optString("roomId", ""));
+                    booking.setRoomName(bookingJson.optString("roomName", ""));
+                    booking.setHotelName(bookingJson.optString("hotelName", ""));
+                    booking.setHotelImage(bookingJson.optString("hotelImage", ""));
+                    booking.setCheckInDate(bookingJson.optString("checkInDate", ""));
+                    booking.setCheckOutDate(bookingJson.optString("checkOutDate", ""));
+                    booking.setCheckInTime(bookingJson.optString("checkInTime", "14:00"));
+                    booking.setCheckOutTime(bookingJson.optString("checkOutTime", "11:00"));
+                    booking.setNumberOfNights(bookingJson.optInt("numberOfNights", 1));
+                    booking.setNumberOfGuests(bookingJson.optInt("numberOfGuests", 1));
+                    booking.setPricePerNight(bookingJson.optDouble("pricePerNight", 0.0));
                     booking.setTotalPrice(bookingJson.getDouble("totalPrice"));
                     booking.setStatus(bookingJson.getString("status"));
                     booking.setNotes(bookingJson.optString("notes"));
                     booking.setCreatedAt(bookingJson.optString("createdAt"));
                     booking.setUpdatedAt(bookingJson.optString("updatedAt"));
                     booking.setLocation(bookingJson.optString("location"));
-                    booking.setDuration(bookingJson.optInt("duration", 0));
+                    booking.setAddress(bookingJson.optString("address", ""));
+                    booking.setRoomType(bookingJson.optString("roomType", ""));
+                    booking.setBedType(bookingJson.optString("bedType", ""));
+                    booking.setHasBreakfast(bookingJson.optBoolean("hasBreakfast", false));
+                    booking.setCancellationPolicy(bookingJson.optString("cancellationPolicy", ""));
                     bookings.add(booking);
                 }
             }
@@ -198,5 +208,100 @@ public class JsonDataManager {
 
     public List<String> getServiceCategories() {
         return Arrays.asList("Professional", "Wellness", "Health", "Business");
+    }
+
+    // Room-specific methods
+    public List<Room> getRooms() {
+        List<Room> rooms = new ArrayList<>();
+        try {
+            String jsonString = loadJSONFromAsset("rooms.json");
+            if (jsonString != null) {
+                JSONObject jsonObject = new JSONObject(jsonString);
+                JSONArray roomsArray = jsonObject.getJSONArray("rooms");
+                
+                for (int i = 0; i < roomsArray.length(); i++) {
+                    JSONObject roomJson = roomsArray.getJSONObject(i);
+                    Room room = new Room();
+                    room.setId(roomJson.getString("id"));
+                    room.setName(roomJson.getString("name"));
+                    room.setDescription(roomJson.getString("description"));
+                    room.setType(roomJson.getString("type"));
+                    room.setPricePerNight(roomJson.getDouble("pricePerNight"));
+                    room.setMaxOccupancy(roomJson.getInt("maxOccupancy"));
+                    room.setHotelId(roomJson.optString("hotelId"));
+                    room.setHotelName(roomJson.optString("hotelName"));
+                    room.setHotelImage(roomJson.optString("hotelImage"));
+                    room.setRating(roomJson.optDouble("rating", 0.0));
+                    room.setReviewCount(roomJson.optInt("reviewCount", 0));
+                    room.setLocation(roomJson.optString("location"));
+                    room.setAddress(roomJson.optString("address"));
+                    room.setDistance(roomJson.optDouble("distance", 0.0));
+                    room.setAvailable(roomJson.optBoolean("isAvailable", true));
+                    room.setCheckInTime(roomJson.optString("checkInTime", "14:00"));
+                    room.setCheckOutTime(roomJson.optString("checkOutTime", "11:00"));
+                    room.setRoomNumber(roomJson.optInt("roomNumber", 0));
+                    room.setFloorNumber(roomJson.optInt("floorNumber", 0));
+                    room.setRoomSize(roomJson.optDouble("roomSize", 0.0));
+                    room.setBedType(roomJson.optString("bedType"));
+                    room.setHasBalcony(roomJson.optBoolean("hasBalcony", false));
+                    room.setHasSeaView(roomJson.optBoolean("hasSeaView", false));
+                    room.setHasCityView(roomJson.optBoolean("hasCityView", false));
+                    room.setHasWifi(roomJson.optBoolean("hasWifi", true));
+                    room.setHasAirConditioning(roomJson.optBoolean("hasAirConditioning", true));
+                    room.setHasBreakfast(roomJson.optBoolean("hasBreakfast", false));
+                    room.setCancellationPolicy(roomJson.optString("cancellationPolicy"));
+                    
+                    // Handle amenities array
+                    JSONArray amenitiesArray = roomJson.optJSONArray("amenities");
+                    if (amenitiesArray != null) {
+                        List<String> amenities = new ArrayList<>();
+                        for (int j = 0; j < amenitiesArray.length(); j++) {
+                            amenities.add(amenitiesArray.getString(j));
+                        }
+                        room.setAmenities(amenities);
+                    }
+                    
+                    // Handle images array
+                    JSONArray imagesArray = roomJson.optJSONArray("images");
+                    if (imagesArray != null) {
+                        List<String> images = new ArrayList<>();
+                        for (int j = 0; j < imagesArray.length(); j++) {
+                            images.add(imagesArray.getString(j));
+                        }
+                        room.setImages(images);
+                    }
+                    
+                    rooms.add(room);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return rooms;
+    }
+
+    public Room getRoomById(String roomId) {
+        List<Room> rooms = getRooms();
+        for (Room room : rooms) {
+            if (room.getId().equals(roomId)) {
+                return room;
+            }
+        }
+        return null;
+    }
+
+    public List<Room> getRoomsByType(String roomType) {
+        List<Room> allRooms = getRooms();
+        List<Room> filteredRooms = new ArrayList<>();
+        for (Room room : allRooms) {
+            if (room.getType().equalsIgnoreCase(roomType)) {
+                filteredRooms.add(room);
+            }
+        }
+        return filteredRooms;
+    }
+
+    public List<String> getRoomTypes() {
+        return Arrays.asList("STANDARD", "DELUXE", "SUITE", "PRESIDENTIAL");
     }
 }

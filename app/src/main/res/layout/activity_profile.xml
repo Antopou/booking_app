@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F7FA">
+    android:background="@color/background_primary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,10 +13,10 @@
         <!-- Header Image -->
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:src="@drawable/header_booking_bg" /> <!-- Download a modern booking header image and name it header_booking_bg.jpg -->
+            android:scaleType="centerCrop"
+            android:src="@drawable/hotel_header_bg" /> <!-- Modern hotel header image -->
 
         <!-- User Info Card -->
         <androidx.cardview.widget.CardView
@@ -54,9 +54,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ready to book your next experience?"
+                        android:text="Find your perfect room today!"
                         android:textSize="15sp"
-                        android:textColor="#666" />
+                        android:textColor="@color/text_secondary" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -78,14 +78,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Upcoming Booking"
+                    android:text="Current Reservation"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:textColor="#2D9CDB" />
+                    android:textColor="@color/primary_blue" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Spa and Wellness - 20 Sep, 3:00 PM"
+                    android:text="Deluxe Suite - Check-in: Sep 28, 2:00 PM"
                     android:textSize="15sp"
                     android:textColor="#444"
                     android:layout_marginTop="6dp" />
@@ -107,7 +107,7 @@
             android:orientation="horizontal"
             android:paddingHorizontal="16dp"
             android:paddingVertical="8dp"
-            android:background="#fff"
+            android:background="@color/background_card"
             android:gravity="center_vertical"
             android:layout_marginHorizontal="16dp"
             android:elevation="2dp">
@@ -120,10 +120,10 @@
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"
-                android:hint="Search for services, venues..."
+                android:hint="Search hotels, rooms, locations..."
                 android:background="@android:color/transparent"
                 android:textSize="16sp"
-                android:textColorHint="#999"
+                android:textColorHint="@color/text_hint"
                 android:textColor="#222"
                 android:inputType="textNoSuggestions"
                 android:gravity="center_vertical"
@@ -139,7 +139,7 @@
             android:padding="16dp"
             android:gravity="center">
             <LinearLayout
-                android:id="@+id/cat_spa"
+                android:id="@+id/cat_standard"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -148,17 +148,17 @@
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/cat_spa" /> <!-- Download a spa icon and name it cat_spa.png -->
+                    android:src="@drawable/ic_standard_room" /> <!-- Standard room icon -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Spa"
+                    android:text="Standard"
                     android:textSize="13sp"
                     android:textColor="#444"
                     android:layout_marginTop="4dp" />
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/cat_hotel"
+                android:id="@+id/cat_deluxe"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -167,17 +167,17 @@
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/cat_hotel" /> <!-- Download a hotel icon and name it cat_hotel.png -->
+                    android:src="@drawable/ic_deluxe_room" /> <!-- Deluxe room icon -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hotel"
+                    android:text="Deluxe"
                     android:textSize="13sp"
                     android:textColor="#444"
                     android:layout_marginTop="4dp" />
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/cat_event"
+                android:id="@+id/cat_suite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -186,17 +186,17 @@
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/cat_event" /> <!-- Download an event icon and name it cat_event.png -->
+                    android:src="@drawable/ic_suite_room" /> <!-- Suite room icon -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Event"
+                    android:text="Suite"
                     android:textSize="13sp"
                     android:textColor="#444"
                     android:layout_marginTop="4dp" />
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/cat_food"
+                android:id="@+id/cat_presidential"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -205,22 +205,22 @@
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/cat_food" /> <!-- Download a food icon and name it cat_food.png -->
+                    android:src="@drawable/ic_presidential_room" /> <!-- Presidential room icon -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Food"
-                    android:textSize="13sp"
+                    android:text="Presidential"
+                    android:textSize="11sp"
                     android:textColor="#444"
                     android:layout_marginTop="4dp" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Featured Services -->
+        <!-- Featured Rooms -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Featured Services"
+            android:text="Featured Rooms"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#2D9CDB"
@@ -228,9 +228,9 @@
             android:paddingTop="16dp"
             android:paddingBottom="8dp" />
 
-        <!-- Service Card 1 -->
+        <!-- Room Card 1 -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/featured_spa_card"
+            android:id="@+id/featured_deluxe_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -246,9 +246,9 @@
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/featured_spa"
+                    android:src="@drawable/room_deluxe"
                     android:scaleType="centerCrop"
-                    android:layout_marginEnd="12dp" /> <!-- Download a spa service image and name it featured_spa.jpg -->
+                    android:layout_marginEnd="12dp" /> <!-- Deluxe room image -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -257,14 +257,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Luxury Spa Experience"
+                        android:text="Deluxe Ocean View"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="#222" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Relax and rejuvenate with our premium spa services."
+                        android:text="Spacious room with stunning ocean views and premium amenities."
                         android:textSize="13sp"
                         android:textColor="#666"
                         android:layout_marginTop="2dp" />
@@ -272,16 +272,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$49"
+                    android:text="$189/night"
                     android:textSize="15sp"
                     android:textColor="#2D9CDB"
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Service Card 2 -->
+        <!-- Room Card 2 -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/featured_hotel_card"
+            android:id="@+id/featured_suite_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -298,9 +298,9 @@
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/featured_hotel"
+                    android:src="@drawable/room_suite"
                     android:scaleType="centerCrop"
-                    android:layout_marginEnd="12dp" /> <!-- Download a hotel service image and name it featured_hotel.jpg -->
+                    android:layout_marginEnd="12dp" /> <!-- Suite room image -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -309,14 +309,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="5-Star Hotel Stay"
+                        android:text="Executive Suite"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="#222" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Book a luxury room at the best price."
+                        android:text="Luxurious suite with separate living area and city views."
                         android:textSize="13sp"
                         android:textColor="#666"
                         android:layout_marginTop="2dp" />
@@ -324,7 +324,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$120"
+                    android:text="$299/night"
                     android:textSize="15sp"
                     android:textColor="#2D9CDB"
                     android:textStyle="bold" />

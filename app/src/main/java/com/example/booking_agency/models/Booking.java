@@ -5,19 +5,28 @@ import java.io.Serializable;
 public class Booking implements Serializable {
     private String id;
     private String userId;
-    private String serviceId;
-    private String serviceName;
-    private String providerName;
-    private String providerImage;
-    private String bookingDate;
-    private String bookingTime;
+    private String roomId;
+    private String roomName;
+    private String hotelName;
+    private String hotelImage;
+    private String checkInDate;
+    private String checkOutDate;
+    private String checkInTime;
+    private String checkOutTime;
+    private int numberOfNights;
+    private int numberOfGuests;
+    private double pricePerNight;
     private double totalPrice;
     private String status; // PENDING, CONFIRMED, COMPLETED, CANCELLED
     private String notes;
     private String createdAt;
     private String updatedAt;
     private String location;
-    private int duration;
+    private String address;
+    private String roomType;
+    private String bedType;
+    private boolean hasBreakfast;
+    private String cancellationPolicy;
 
     public enum BookingStatus {
         PENDING, CONFIRMED, COMPLETED, CANCELLED
@@ -25,17 +34,22 @@ public class Booking implements Serializable {
 
     public Booking() {}
 
-    public Booking(String id, String userId, String serviceId, String serviceName, 
-                   String bookingDate, String bookingTime, double totalPrice) {
+    public Booking(String id, String userId, String roomId, String roomName, 
+                   String checkInDate, String checkOutDate, int numberOfNights, double pricePerNight) {
         this.id = id;
         this.userId = userId;
-        this.serviceId = serviceId;
-        this.serviceName = serviceName;
-        this.bookingDate = bookingDate;
-        this.bookingTime = bookingTime;
-        this.totalPrice = totalPrice;
+        this.roomId = roomId;
+        this.roomName = roomName;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.numberOfNights = numberOfNights;
+        this.pricePerNight = pricePerNight;
+        this.totalPrice = pricePerNight * numberOfNights;
         this.status = BookingStatus.PENDING.toString();
         this.createdAt = String.valueOf(System.currentTimeMillis());
+        this.checkInTime = "14:00";
+        this.checkOutTime = "11:00";
+        this.numberOfGuests = 1;
     }
 
     // Getters and Setters
@@ -45,23 +59,38 @@ public class Booking implements Serializable {
     public String getUserId() { return userId; }
     public void setUserId(String userId) { this.userId = userId; }
 
-    public String getServiceId() { return serviceId; }
-    public void setServiceId(String serviceId) { this.serviceId = serviceId; }
+    public String getRoomId() { return roomId; }
+    public void setRoomId(String roomId) { this.roomId = roomId; }
 
-    public String getServiceName() { return serviceName; }
-    public void setServiceName(String serviceName) { this.serviceName = serviceName; }
+    public String getRoomName() { return roomName; }
+    public void setRoomName(String roomName) { this.roomName = roomName; }
 
-    public String getProviderName() { return providerName; }
-    public void setProviderName(String providerName) { this.providerName = providerName; }
+    public String getHotelName() { return hotelName; }
+    public void setHotelName(String hotelName) { this.hotelName = hotelName; }
 
-    public String getProviderImage() { return providerImage; }
-    public void setProviderImage(String providerImage) { this.providerImage = providerImage; }
+    public String getHotelImage() { return hotelImage; }
+    public void setHotelImage(String hotelImage) { this.hotelImage = hotelImage; }
 
-    public String getBookingDate() { return bookingDate; }
-    public void setBookingDate(String bookingDate) { this.bookingDate = bookingDate; }
+    public String getCheckInDate() { return checkInDate; }
+    public void setCheckInDate(String checkInDate) { this.checkInDate = checkInDate; }
 
-    public String getBookingTime() { return bookingTime; }
-    public void setBookingTime(String bookingTime) { this.bookingTime = bookingTime; }
+    public String getCheckOutDate() { return checkOutDate; }
+    public void setCheckOutDate(String checkOutDate) { this.checkOutDate = checkOutDate; }
+
+    public String getCheckInTime() { return checkInTime; }
+    public void setCheckInTime(String checkInTime) { this.checkInTime = checkInTime; }
+
+    public String getCheckOutTime() { return checkOutTime; }
+    public void setCheckOutTime(String checkOutTime) { this.checkOutTime = checkOutTime; }
+
+    public int getNumberOfNights() { return numberOfNights; }
+    public void setNumberOfNights(int numberOfNights) { this.numberOfNights = numberOfNights; }
+
+    public int getNumberOfGuests() { return numberOfGuests; }
+    public void setNumberOfGuests(int numberOfGuests) { this.numberOfGuests = numberOfGuests; }
+
+    public double getPricePerNight() { return pricePerNight; }
+    public void setPricePerNight(double pricePerNight) { this.pricePerNight = pricePerNight; }
 
     public double getTotalPrice() { return totalPrice; }
     public void setTotalPrice(double totalPrice) { this.totalPrice = totalPrice; }
@@ -81,6 +110,31 @@ public class Booking implements Serializable {
     public String getLocation() { return location; }
     public void setLocation(String location) { this.location = location; }
 
-    public int getDuration() { return duration; }
-    public void setDuration(int duration) { this.duration = duration; }
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
+
+    public String getRoomType() { return roomType; }
+    public void setRoomType(String roomType) { this.roomType = roomType; }
+
+    public String getBedType() { return bedType; }
+    public void setBedType(String bedType) { this.bedType = bedType; }
+
+    public boolean isHasBreakfast() { return hasBreakfast; }
+    public void setHasBreakfast(boolean hasBreakfast) { this.hasBreakfast = hasBreakfast; }
+
+    public String getCancellationPolicy() { return cancellationPolicy; }
+    public void setCancellationPolicy(String cancellationPolicy) { this.cancellationPolicy = cancellationPolicy; }
+
+    // Helper methods
+    public String getFormattedTotalPrice() {
+        return String.format("$%.0f", totalPrice);
+    }
+
+    public String getStayDuration() {
+        return numberOfNights + " night" + (numberOfNights > 1 ? "s" : "");
+    }
+
+    public String getGuestCount() {
+        return numberOfGuests + " guest" + (numberOfGuests > 1 ? "s" : "");
+    }
 }

@@ -43,34 +43,34 @@ public class MainActivity extends AppCompatActivity {
     }
     
     private void setupClickListeners() {
-        // Set up click listeners for new categories by ID
-        LinearLayout catSpa = findViewById(R.id.cat_spa);
-        LinearLayout catHotel = findViewById(R.id.cat_hotel);
-        LinearLayout catEvent = findViewById(R.id.cat_event);
-        LinearLayout catFood = findViewById(R.id.cat_food);
+        // Set up click listeners for room categories by ID
+        LinearLayout catStandard = findViewById(R.id.cat_standard);
+        LinearLayout catDeluxe = findViewById(R.id.cat_deluxe);
+        LinearLayout catSuite = findViewById(R.id.cat_suite);
+        LinearLayout catPresidential = findViewById(R.id.cat_presidential);
 
-        if (catSpa != null) {
-            catSpa.setOnClickListener(v -> openServicesActivity("Spa"));
+        if (catStandard != null) {
+            catStandard.setOnClickListener(v -> openRoomsActivity("STANDARD"));
         }
-        if (catHotel != null) {
-            catHotel.setOnClickListener(v -> openServicesActivity("Hotel"));
+        if (catDeluxe != null) {
+            catDeluxe.setOnClickListener(v -> openRoomsActivity("DELUXE"));
         }
-        if (catEvent != null) {
-            catEvent.setOnClickListener(v -> openServicesActivity("Event"));
+        if (catSuite != null) {
+            catSuite.setOnClickListener(v -> openRoomsActivity("SUITE"));
         }
-        if (catFood != null) {
-            catFood.setOnClickListener(v -> openServicesActivity("Food"));
+        if (catPresidential != null) {
+            catPresidential.setOnClickListener(v -> openRoomsActivity("PRESIDENTIAL"));
         }
 
-        // Set up click listeners for featured service cards by ID
-        CardView featuredSpa = findViewById(R.id.featured_spa_card);
-        CardView featuredHotel = findViewById(R.id.featured_hotel_card);
+        // Set up click listeners for featured room cards by ID
+        CardView featuredDeluxe = findViewById(R.id.featured_deluxe_card);
+        CardView featuredSuite = findViewById(R.id.featured_suite_card);
 
-        if (featuredSpa != null) {
-            featuredSpa.setOnClickListener(v -> openServiceDetails("featured_spa"));
+        if (featuredDeluxe != null) {
+            featuredDeluxe.setOnClickListener(v -> openRoomDetails("deluxe_ocean_view"));
         }
-        if (featuredHotel != null) {
-            featuredHotel.setOnClickListener(v -> openServiceDetails("featured_hotel"));
+        if (featuredSuite != null) {
+            featuredSuite.setOnClickListener(v -> openRoomDetails("executive_suite"));
         }
 
         // Set up click listener for booking summary card's button
@@ -80,16 +80,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     
-    private void openServicesActivity(String category) {
-        Intent intent = new Intent(this, ServicesActivity.class);
-        intent.putExtra("category", category);
+    private void openRoomsActivity(String roomType) {
+        Intent intent = new Intent(this, ServicesActivity.class); // Will be renamed to RoomsActivity later
+        intent.putExtra("roomType", roomType);
         intent.putExtra("userId", currentUser.getId());
         startActivity(intent);
     }
     
-    private void openServiceDetails(String serviceId) {
-        Intent intent = new Intent(this, ServiceDetailsActivity.class);
-        intent.putExtra("serviceId", serviceId);
+    private void openRoomDetails(String roomId) {
+        Intent intent = new Intent(this, ServiceDetailsActivity.class); // Will be renamed to RoomDetailsActivity later
+        intent.putExtra("roomId", roomId);
         intent.putExtra("userId", currentUser.getId());
         startActivity(intent);
     }
